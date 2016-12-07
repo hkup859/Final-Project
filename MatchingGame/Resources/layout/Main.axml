@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:p1="http://schemas.android.com/apk/res/android"
+    p1:orientation="vertical"
+    p1:layout_width="match_parent"
+    p1:layout_height="match_parent"
+    p1:id="@+id/appScreen">
+    <GridLayout
+        p1:minWidth="25px"
+        p1:minHeight="25px"
+        p1:layout_width="match_parent"
+        p1:layout_height="550.0dp"
+        p1:id="@+id/gameMap"
+        p1:columnCount="4"
+        p1:visibility="gone">
+        <Button
+            p1:text="Submit"
+            p1:id="@+id/button1"
+            p1:layout_height="40dp"
+            p1:layout_marginTop="0dp" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card1"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:tint="#00000000"
+            p1:clickable="true"
+            p1:layout_marginTop="5dp" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card2"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:layout_marginLeft="5dp"
+            p1:layout_marginTop="5dp"
+            p1:clickable="true" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card3"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:layout_marginLeft="5dp"
+            p1:layout_marginTop="5dp"
+            p1:clickable="true" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card4"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:layout_marginLeft="5dp"
+            p1:clickable="true" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card5"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:layout_marginTop="2dp"
+            p1:clickable="true" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card6"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:layout_marginLeft="5dp"
+            p1:layout_marginTop="2dp"
+            p1:clickable="true" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card7"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:layout_marginLeft="5dp"
+            p1:layout_marginTop="2dp"
+            p1:clickable="true" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card8"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:layout_marginLeft="5dp"
+            p1:layout_marginTop="2dp"
+            p1:clickable="true" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card9"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:layout_marginTop="2dp"
+            p1:clickable="true" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card10"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:layout_marginLeft="5dp"
+            p1:layout_marginTop="2dp"
+            p1:clickable="true" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card11"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:layout_marginLeft="5dp"
+            p1:layout_marginTop="2dp"
+            p1:clickable="true" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card12"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:layout_marginLeft="5dp"
+            p1:layout_marginTop="2dp"
+            p1:clickable="true" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card13"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:layout_marginTop="2dp"
+            p1:clickable="true" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card14"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:layout_marginLeft="5dp"
+            p1:layout_marginTop="2dp"
+            p1:clickable="true" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card15"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:layout_marginLeft="5dp"
+            p1:layout_marginTop="2dp"
+            p1:clickable="true" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card16"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:layout_marginLeft="5dp"
+            p1:layout_marginTop="2dp"
+            p1:clickable="true" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card17"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:layout_marginTop="2dp"
+            p1:clickable="true" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card18"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:layout_marginLeft="5dp"
+            p1:layout_marginTop="2dp"
+            p1:clickable="true" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card19"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:layout_marginLeft="5dp"
+            p1:layout_marginTop="2dp"
+            p1:clickable="true" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card20"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:layout_marginLeft="5dp"
+            p1:layout_marginTop="2dp"
+            p1:clickable="true" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card21"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:layout_marginTop="2dp"
+            p1:clickable="true" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card22"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:layout_marginLeft="5dp"
+            p1:layout_marginTop="2dp"
+            p1:clickable="true" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card23"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:layout_marginLeft="5dp"
+            p1:layout_marginTop="2dp"
+            p1:clickable="true" />
+        <ImageButton
+            p1:src="@android:drawable/ic_menu_gallery"
+            p1:id="@+id/card24"
+            p1:layout_height="80dp"
+            p1:layout_width="80dp"
+            p1:background="@drawable/black"
+            p1:layout_marginLeft="5dp"
+            p1:layout_marginTop="2dp"
+            p1:clickable="true" />
+        <GridLayout
+            p1:minWidth="25px"
+            p1:minHeight="25px"
+            p1:id="@+id/gameMapVoid"
+            p1:columnCount="4"
+            p1:visibility="gone">
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card1"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black" />
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card2"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black"
+                p1:layout_marginLeft="5dp"
+                p1:layout_marginTop="2dp" />
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card3"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black"
+                p1:layout_marginLeft="5dp"
+                p1:layout_marginTop="2dp" />
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card4"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black"
+                p1:layout_marginLeft="5dp" />
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card5"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black"
+                p1:layout_marginTop="2dp" />
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card6"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black"
+                p1:layout_marginLeft="5dp"
+                p1:layout_marginTop="2dp" />
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card7"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black"
+                p1:layout_marginLeft="5dp"
+                p1:layout_marginTop="2dp" />
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card8"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black"
+                p1:layout_marginLeft="5dp"
+                p1:layout_marginTop="2dp" />
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card9"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black"
+                p1:layout_marginTop="2dp" />
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card10"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black"
+                p1:layout_marginLeft="5dp"
+                p1:layout_marginTop="2dp" />
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card11"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black"
+                p1:layout_marginLeft="5dp"
+                p1:layout_marginTop="2dp" />
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card12"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black"
+                p1:layout_marginLeft="5dp"
+                p1:layout_marginTop="2dp" />
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card13"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black"
+                p1:layout_marginTop="2dp" />
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card14"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black"
+                p1:layout_marginLeft="5dp"
+                p1:layout_marginTop="2dp" />
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card15"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black"
+                p1:layout_marginLeft="5dp"
+                p1:layout_marginTop="2dp" />
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card16"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black"
+                p1:layout_marginLeft="5dp"
+                p1:layout_marginTop="2dp" />
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card17"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black"
+                p1:layout_marginTop="2dp" />
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card18"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black"
+                p1:layout_marginLeft="5dp"
+                p1:layout_marginTop="2dp" />
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card19"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black"
+                p1:layout_marginLeft="5dp"
+                p1:layout_marginTop="2dp" />
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card20"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black"
+                p1:layout_marginLeft="5dp"
+                p1:layout_marginTop="2dp" />
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card21"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black"
+                p1:layout_marginTop="2dp" />
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card22"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black"
+                p1:layout_marginLeft="5dp"
+                p1:layout_marginTop="2dp" />
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card23"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black"
+                p1:layout_marginLeft="5dp"
+                p1:layout_marginTop="2dp" />
+            <ImageButton
+                p1:src="@android:drawable/ic_menu_gallery"
+                p1:id="@+id/card24"
+                p1:layout_height="90dp"
+                p1:layout_width="90dp"
+                p1:background="@drawable/black"
+                p1:layout_marginLeft="5dp"
+                p1:layout_marginTop="2dp" />
+        </GridLayout>
+    </GridLayout>
+    <LinearLayout
+        p1:orientation="vertical"
+        p1:minWidth="25px"
+        p1:minHeight="25px"
+        p1:layout_width="match_parent"
+        p1:layout_height="wrap_content"
+        p1:id="@+id/homeMenu"
+        p1:visibility="visible">
+        <CheckBox
+            p1:text="Peek Ability"
+            p1:layout_width="match_parent"
+            p1:layout_height="wrap_content"
+            p1:id="@+id/peekAbility" />
+        <Button
+            p1:text="Start Game"
+            p1:layout_width="match_parent"
+            p1:layout_height="wrap_content"
+            p1:id="@+id/startGame" />
+    </LinearLayout>
+    <LinearLayout
+        p1:orientation="vertical"
+        p1:minWidth="25px"
+        p1:minHeight="25px"
+        p1:layout_width="match_parent"
+        p1:layout_height="match_parent"
+        p1:id="@+id/endScreen"
+        p1:visibility="gone">
+        <TextView
+            p1:text="Completion Time:"
+            p1:layout_width="match_parent"
+            p1:layout_height="50dp"
+            p1:id="@+id/completionTime"
+            p1:textSize="24dp" />
+        <TextView
+            p1:text="Best Time:"
+            p1:layout_width="match_parent"
+            p1:layout_height="wrap_content"
+            p1:id="@+id/bestTime"
+            p1:textSize="24dp" />
+    </LinearLayout>
+</LinearLayout>
