@@ -208,7 +208,7 @@ namespace MatchingGame
                 //Card card = cardDisplayList.Skip(i).Take(1).FirstOrDefault();
                 Card card = currentCards.Skip(i).Take(1).FirstOrDefault();
                 var imageButton = ((ImageButton)layout.GetChildAt(i));
-
+                //
                 //if (card == null)
                 //    card = cardList.Skip((int)((i / 2.0) + 0.5)).Take(1).FirstOrDefault();
 
