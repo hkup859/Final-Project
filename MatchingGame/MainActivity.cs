@@ -10,272 +10,231 @@ namespace MatchingGame
     [Activity(Label = "MatchingGame", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
-        public List<Card> currentCards { get; set; }
-        public Boolean gameGoing = false;
+        //public List<Card> currentCards { get; set; }
+        public List<Card> cardList { get; set; }
+        public Card currentCard = null;
+        public Card lastCard = null;
+        public int fails = 0;
+        public int score = 0;
+        public int runningScore = 0;
+        public Boolean guessed = false;
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            currentCards = new List<Card>();
+            cardList = new List<Card>();
 
             // Set our view from the "main" layout resource
             SetContentView (Resource.Layout.Main);
-            var startGameButton = FindViewById<Button>(Resource.Id.startGame);
-            var button1 = FindViewById<Button>(Resource.Id.button1);
-            var imageButton1 = FindViewById<ImageButton>(Resource.Id.card1);
-            var imageButton2 = FindViewById<ImageButton>(Resource.Id.card2);
-            var imageButton3 = FindViewById<ImageButton>(Resource.Id.card3);
-            var imageButton4 = FindViewById<ImageButton>(Resource.Id.card4);
-            var imageButton5 = FindViewById<ImageButton>(Resource.Id.card5);
-            var imageButton6 = FindViewById<ImageButton>(Resource.Id.card6);
-            var imageButton7 = FindViewById<ImageButton>(Resource.Id.card7);
-            var imageButton8 = FindViewById<ImageButton>(Resource.Id.card8);
-            var imageButton9 = FindViewById<ImageButton>(Resource.Id.card9);
-            var imageButton10 = FindViewById<ImageButton>(Resource.Id.card10);
-            var imageButton11 = FindViewById<ImageButton>(Resource.Id.card11);
-            var imageButton12 = FindViewById<ImageButton>(Resource.Id.card12);
-            var imageButton13 = FindViewById<ImageButton>(Resource.Id.card13);
-            var imageButton14 = FindViewById<ImageButton>(Resource.Id.card14);
-            var imageButton15 = FindViewById<ImageButton>(Resource.Id.card15);
-            var imageButton16 = FindViewById<ImageButton>(Resource.Id.card16);
-            var imageButton17 = FindViewById<ImageButton>(Resource.Id.card17);
-            var imageButton18 = FindViewById<ImageButton>(Resource.Id.card18);
-            var imageButton19 = FindViewById<ImageButton>(Resource.Id.card19);
-            var imageButton20 = FindViewById<ImageButton>(Resource.Id.card20);
-            var imageButton21 = FindViewById<ImageButton>(Resource.Id.card21);
-            var imageButton22 = FindViewById<ImageButton>(Resource.Id.card22);
-            var imageButton23 = FindViewById<ImageButton>(Resource.Id.card23);
-            var imageButton24 = FindViewById<ImageButton>(Resource.Id.card24);
-            
-
-
-            startGameButton.Click += delegate {StartGame(this);};
-            button1.Click += delegate {viewChange(this);};
-            imageButton1.Click += delegate {cardClicked(imageButton1, 1);};
-            imageButton2.Click += delegate { cardClicked(imageButton2, 2); };
-            imageButton3.Click += delegate { cardClicked(imageButton3, 3); };
-            imageButton4.Click += delegate { cardClicked(imageButton4, 4); };
-            imageButton5.Click += delegate { cardClicked(imageButton5, 5); };
-            imageButton6.Click += delegate { cardClicked(imageButton6, 6); };
-            imageButton7.Click += delegate { cardClicked(imageButton7, 7); };
-            imageButton8.Click += delegate { cardClicked(imageButton8, 8); };
-            imageButton9.Click += delegate { cardClicked(imageButton9, 9); };
-            imageButton10.Click += delegate { cardClicked(imageButton10, 10); };
-            imageButton11.Click += delegate { cardClicked(imageButton11, 11); };
-            imageButton12.Click += delegate { cardClicked(imageButton12, 12); };
-            imageButton13.Click += delegate { cardClicked(imageButton13, 13); };
-            imageButton14.Click += delegate { cardClicked(imageButton14, 14); };
-            imageButton15.Click += delegate { cardClicked(imageButton15, 15); };
-            imageButton16.Click += delegate { cardClicked(imageButton16, 16); };
-            imageButton17.Click += delegate { cardClicked(imageButton17, 17); };
-            imageButton18.Click += delegate { cardClicked(imageButton18, 18); };
-            imageButton19.Click += delegate { cardClicked(imageButton19, 19); };
-            imageButton20.Click += delegate { cardClicked(imageButton20, 20); };
-            imageButton21.Click += delegate { cardClicked(imageButton21, 21); };
-            imageButton22.Click += delegate { cardClicked(imageButton22, 22); };
-            imageButton23.Click += delegate { cardClicked(imageButton23, 23); };
-            imageButton24.Click += delegate { cardClicked(imageButton24, 24); };
-        }
+            //var startGameButton = FindViewById<Button>(Resource.Id.startGame);
+            var originalButton = FindViewById<Button>(Resource.Id.original);
+            var firstButton = FindViewById<Button>(Resource.Id.first);
+            var secondButton = FindViewById<Button>(Resource.Id.second);
+            var thirdButton = FindViewById<Button>(Resource.Id.third);
+            var nextButton = FindViewById<Button>(Resource.Id.nextImage);
 
 
 
-        public void StartGame(MainActivity gameBoard)
-        {
-            var gameMap = gameBoard.FindViewById<GridLayout>(Resource.Id.gameMap);
-            var homeMenu = gameBoard.FindViewById<LinearLayout>(Resource.Id.homeMenu);
-            
-            gameMap.Visibility = Android.Views.ViewStates.Visible;
-            homeMenu.Visibility = Android.Views.ViewStates.Gone;
-            
+
+
+            originalButton.Click += delegate {Guess(this, 0);};
+            firstButton.Click += delegate { Guess(this, 1); };
+            secondButton.Click += delegate { Guess(this, 2); };
+            thirdButton.Click += delegate { Guess(this, 3); };
+            nextButton.Click += delegate { nextImage(this); };
+
 
             //Import In All Cards
-            List<Card> cardList = new List<Card>();
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon1,  BackImage = Resource.Drawable.black, Visible = 0, Value = 1});
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon2,  BackImage = Resource.Drawable.black, Visible = 0, Value = 2 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon3,  BackImage = Resource.Drawable.black, Visible = 0, Value = 3 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon4,  BackImage = Resource.Drawable.black, Visible = 0, Value = 4 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon5,  BackImage = Resource.Drawable.black, Visible = 0, Value = 5 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon6,  BackImage = Resource.Drawable.black, Visible = 0, Value = 6 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon7,  BackImage = Resource.Drawable.black, Visible = 0, Value = 7 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon8,  BackImage = Resource.Drawable.black, Visible = 0, Value = 8 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon9,  BackImage = Resource.Drawable.black, Visible = 0, Value = 9 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon10,  BackImage = Resource.Drawable.black, Visible = 0, Value = 10 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon11,  BackImage = Resource.Drawable.black, Visible = 0, Value = 11 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon12,  BackImage = Resource.Drawable.black, Visible = 0, Value = 12 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon13,  BackImage = Resource.Drawable.black, Visible = 0, Value = 13 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon14,  BackImage = Resource.Drawable.black, Visible = 0, Value = 14 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon15,  BackImage = Resource.Drawable.black, Visible = 0, Value = 15 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon16,  BackImage = Resource.Drawable.black, Visible = 0, Value = 16 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon17,  BackImage = Resource.Drawable.black, Visible = 0, Value = 17 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon18,  BackImage = Resource.Drawable.black, Visible = 0, Value = 18 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon19,  BackImage = Resource.Drawable.black, Visible = 0, Value = 19 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon21,  BackImage = Resource.Drawable.black, Visible = 0, Value = 20 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon22,  BackImage = Resource.Drawable.black, Visible = 0, Value = 21 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon23,  BackImage = Resource.Drawable.black, Visible = 0, Value = 22 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon24,  BackImage = Resource.Drawable.black, Visible = 0, Value = 23 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon25,  BackImage = Resource.Drawable.black, Visible = 0, Value = 24 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon26,  BackImage = Resource.Drawable.black, Visible = 0, Value = 25 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon27,  BackImage = Resource.Drawable.black, Visible = 0, Value = 26 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon28,  BackImage = Resource.Drawable.black, Visible = 0, Value = 27 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon29,  BackImage = Resource.Drawable.black, Visible = 0, Value = 28 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon20,  BackImage = Resource.Drawable.black, Visible = 0, Value = 29 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon30,  BackImage = Resource.Drawable.black, Visible = 0, Value = 30 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon31,  BackImage = Resource.Drawable.black, Visible = 0, Value = 31 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon32,  BackImage = Resource.Drawable.black, Visible = 0, Value = 32 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon33,  BackImage = Resource.Drawable.black, Visible = 0, Value = 33 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon34,  BackImage = Resource.Drawable.black, Visible = 0, Value = 34 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon35,  BackImage = Resource.Drawable.black, Visible = 0, Value = 35 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon36,  BackImage = Resource.Drawable.black, Visible = 0, Value = 36 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon37,  BackImage = Resource.Drawable.black, Visible = 0, Value = 37 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon38,  BackImage = Resource.Drawable.black, Visible = 0, Value = 38 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon39,  BackImage = Resource.Drawable.black, Visible = 0, Value = 39 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon40,  BackImage = Resource.Drawable.black, Visible = 0, Value = 40 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon41,  BackImage = Resource.Drawable.black, Visible = 0, Value = 41 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon42,  BackImage = Resource.Drawable.black, Visible = 0, Value = 42 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon43,  BackImage = Resource.Drawable.black, Visible = 0, Value = 43 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon44,  BackImage = Resource.Drawable.black, Visible = 0, Value = 44 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon45,  BackImage = Resource.Drawable.black, Visible = 0, Value = 45 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon46,  BackImage = Resource.Drawable.black, Visible = 0, Value = 46 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon48,  BackImage = Resource.Drawable.black, Visible = 0, Value = 47 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon47,  BackImage = Resource.Drawable.black, Visible = 0, Value = 48 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon49,  BackImage = Resource.Drawable.black, Visible = 0, Value = 49 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon50,  BackImage = Resource.Drawable.black, Visible = 0, Value = 50 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon51,  BackImage = Resource.Drawable.black, Visible = 0, Value = 51 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon52,  BackImage = Resource.Drawable.black, Visible = 0, Value = 52 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon53,  BackImage = Resource.Drawable.black, Visible = 0, Value = 53 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon54,  BackImage = Resource.Drawable.black, Visible = 0, Value = 54 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon55,  BackImage = Resource.Drawable.black, Visible = 0, Value = 55 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon56,  BackImage = Resource.Drawable.black, Visible = 0, Value = 56 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon57,  BackImage = Resource.Drawable.black, Visible = 0, Value = 57 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon58,  BackImage = Resource.Drawable.black, Visible = 0, Value = 58 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon59,  BackImage = Resource.Drawable.black, Visible = 0, Value = 59 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon60,  BackImage = Resource.Drawable.black, Visible = 0, Value = 60 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon61,  BackImage = Resource.Drawable.black, Visible = 0, Value = 61 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon62,  BackImage = Resource.Drawable.black, Visible = 0, Value = 62 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon63,  BackImage = Resource.Drawable.black, Visible = 0, Value = 63 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon64,  BackImage = Resource.Drawable.black, Visible = 0, Value = 64 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon65,  BackImage = Resource.Drawable.black, Visible = 0, Value = 65 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon66,  BackImage = Resource.Drawable.black, Visible = 0, Value = 66 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon67,  BackImage = Resource.Drawable.black, Visible = 0, Value = 67 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon68,  BackImage = Resource.Drawable.black, Visible = 0, Value = 68 });
-            cardList.Add(new Card { FrontImage = Resource.Drawable.Pokemon69,  BackImage = Resource.Drawable.black, Visible = 0, Value = 69 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon1, Value = 2 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon2, Value = 2 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon3, Value = 2 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon4, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon5, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon6, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon7, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon8, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon9, Value = 2 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon10, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon11, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon12, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon13, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon14, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon15, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon16, Value = 2 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon17, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon18, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon19, Value = 3 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon21, Value = 3 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon22, Value = 3 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon23, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon24, Value = 2 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon25, Value = 3 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon26, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon27, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon28, Value = 3 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon29, Value = 3 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon20, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon30, Value = 2 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon31, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon32, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon33, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon34, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon35, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon36, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon37, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon38, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon39, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon40, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon41, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon42, Value = 2 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon43, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon44, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon45, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon46, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon48, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon47, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon49, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon50, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon51, Value = 2 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon52, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon53, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon54, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon55, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon56, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon57, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon58, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon59, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon60, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon61, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon62, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon63, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon64, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon65, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon66, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon67, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon68, Value = 2 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon69, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon74, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon75, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon76, Value = 2});
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon77, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon78, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon79, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon80, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon81, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon82, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon83, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon84, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon85, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon86, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon87, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon88, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon89, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon90, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon91, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon92, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon93, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon94, Value = 2 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon95, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon95-1, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon96, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon97, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon98, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon99, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon100, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon101, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon102, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon103, Value = 1 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon104, Value = 0 });
+            cardList.Add(new Card { Image = Resource.Drawable.Pokemon105, Value = 1 });
 
+            start(this);
+
+        }
+
+
+        public void start(MainActivity screen)
+        {
             Random random = new Random();
-            var layout = gameBoard.FindViewById<GridLayout>(Resource.Id.gameMap);
-
-            //var test = (ImageButton)layout.GetChildAt(0);
-            List<Card> cardDisplayList = new List<Card>();
-            //currentCards = new List<Card>();
-
-            for (int i = 0; i < layout.ChildCount/2; i++)
-            {
-                int randNum = random.Next(0, cardList.Count);
-                Card card = cardList.Skip(randNum).Take(1).FirstOrDefault();
-                cardDisplayList.Add(card);
-                cardDisplayList.Add(card);
-            }
-
-            for (int i = 1; i < layout.ChildCount-1; i++)
-            {
-                int randNum = random.Next(0, cardDisplayList.Count);
-                Card card = cardDisplayList.Skip(randNum).Take(1).FirstOrDefault();
-                var imageButton = ((ImageButton)layout.GetChildAt(i));
-                
-                if(card == null)
-                    card = cardList.Skip((int)((i/2.0)+0.5)).Take(1).FirstOrDefault();
-
-                imageButton.SetImageResource(card.FrontImage);
-                gameBoard.currentCards.Add(card);
-                cardDisplayList.RemoveAt(randNum);
-            }
-
-            System.Threading.Thread.Sleep(3000);
-            Toast toast = Toast.MakeText(this, "Testing Message", ToastLength.Short);
-            toast.Show();
+            int randNum = random.Next(0, cardList.Count);
+            var layout = screen.FindViewById<LinearLayout>(Resource.Id.appScreen);
+            var imageView = screen.FindViewById<ImageView>(Resource.Id.image);
+            var card = cardList.Skip(randNum).Take(1).FirstOrDefault();
+            imageView.SetImageResource(card.Image);
+            currentCard = card;
 
 
-
-            //System.Threading.Thread.Sleep(3000);
         }
 
-        public void viewChange(MainActivity gameBoard)
+        public void nextImage(MainActivity screen)
         {
-
-///*            
-            var layout = gameBoard.FindViewById<GridLayout>(Resource.Id.gameMap);
-            for (int i = 1; i < layout.ChildCount - 2; i++)
-            {
-                //int randNum = random.Next(0, cardDisplayList.Count);
-                //Card card = cardDisplayList.Skip(i).Take(1).FirstOrDefault();
-                Card card = currentCards.Skip(i).Take(1).FirstOrDefault();
-                var imageButton = ((ImageButton)layout.GetChildAt(i));
-                //
-                //if (card == null)
-                //    card = cardList.Skip((int)((i / 2.0) + 0.5)).Take(1).FirstOrDefault();
-
-                imageButton.SetImageResource(card.BackImage);
-                //cardDisplayList.RemoveAt(i);
-            }
+            Random random = new Random();
             
-            //*/
+            var textView = screen.FindViewById<TextView>(Resource.Id.textView);
+            int randNum = random.Next(0, cardList.Count);
+            var imageView = screen.FindViewById<ImageView>(Resource.Id.image);
+            var runningScoreView = screen.FindViewById<TextView>(Resource.Id.runningScore);
+            var card = cardList.Skip(randNum).Take(1).FirstOrDefault();
+            imageView.SetImageResource(card.Image);
+            currentCard = card;
+            textView.Text = "Please Guess";
+            if(!guessed)
+            {
+                runningScore = 0;
+                runningScoreView.Text = "Current Run: " + runningScore;
+            }
+            guessed = false;
 
-
-            /*            var layout = gameBoard.FindViewById<GridLayout>(Resource.Id.gameMap);
-                        ImageButton visible1 = null;
-                        ImageButton visible2 = null;
-                        Card defaultCard = currentCards.Skip(1).Take(1).FirstOrDefault();
-                        for (int i = 1; i < layout.ChildCount - 2; i++)
-                        { 
-                            Card card = currentCards.Skip(i).Take(1).FirstOrDefault();           
-                            var imageButton = ((ImageButton)layout.GetChildAt(i));
-
-                            if (gameGoing == false)
-                            {
-                                imageButton.SetImageResource(card.BackImage);
-                            }
-                            else
-                            {
-                                //If imageButton is not backImage
-                                //If(imageButton.SetImageResource = "test")
-                                if(card.Visible == 1)
-                                {
-                                    if(visible1 == null)
-                                    {
-                                        visible1 = imageButton;
-                                    }
-                                    else
-                                    {
-                                        visible2 = imageButton;
-                                    }
-                                }
-                            }
-                        } //End For Loop
-
-                        if(visible1 != null && visible2 != null)
-                        {
-                            //Wait(3 Seconds), then reset.
-                            System.Threading.Thread.Sleep(3000);
-                            visible1.SetImageResource(defaultCard.BackImage);
-                            visible2.SetImageResource(defaultCard.BackImage);
-                            visible1 = null;
-                            visible2 = null;
-                        }
-
-                        gameGoing = true;
-
-             */
         }
 
-        public void cardClicked(ImageButton button, int cardNum)
-        {
-            //Physically Show card
-            Card card = currentCards.Skip(cardNum).Take(1).FirstOrDefault();
-            button.SetImageResource(card.FrontImage);
-            //Set card's visible to 1
-            card.Visible = 1;
-           
+        public void Guess(MainActivity screen, int buttonNum)
+        {    
+            var textView = screen.FindViewById<TextView>(Resource.Id.textView);
+            var scoreView = screen.FindViewById<TextView>(Resource.Id.score);
+            var runningScoreView = screen.FindViewById<TextView>(Resource.Id.runningScore);
+
+            guessed = true;
+            if (buttonNum == currentCard.Value && lastCard != currentCard)
+            {
+                lastCard = currentCard;
+                fails = 0;
+                score += 1;
+                runningScore += 1;
+                scoreView.Text = "Score: " + score;
+                runningScoreView.Text = "Current Run: " + runningScore;
+                if(runningScore <= 2)
+                {
+                    textView.Text = "Correct!";
+                }
+                else if(runningScore <= 4)
+                {
+                    textView.Text = "Way to go!";
+                }
+                else if(runningScore <= 6)
+                {
+                    textView.Text = "Your on fire!";
+                }
+                else if (runningScore <= 10)
+                {
+                    textView.Text = "Amazing!";
+                }
+                else if (runningScore <= 15)
+                {
+                    textView.Text = "Pokemon Master!";
+                }
+
+            }
+            else if(lastCard == currentCard)
+            {
+                textView.Text = "Click Next Image!";
+            }
+            else
+            {
+                fails += 1;
+                runningScore = 0;
+                runningScoreView.Text = "Current Run: " + runningScore;
+                textView.Text = "Incorrect, guess again x" + fails;
+            }
         }
-
-
     }
 }
 
